@@ -1,4 +1,4 @@
-# 🚀 PM-AI Assistant
+# PM-AI Assistant
 
 ### Conversational AI for Intelligent Project Management
 
@@ -6,64 +6,64 @@
 
 ---
 
-## 📌 Executive Summary
+## Executive Summary
 
 PM-AI Assistant is a **next-generation project management system** designed to help managers make faster, smarter decisions.
 
 Unlike traditional tools, this system is:
 
-* ⚡ Proactive (predicts problems early)
-* 🤖 Intelligent (AI-driven insights)
-* 💬 Conversational (chat-based interaction)
+* Proactive (predicts problems early)
+* Intelligent (AI-driven insights)
+* Conversational (chat-based interaction)
 
 ---
 
-## 🧠 Problem Statement
+## Problem Statement
 
 Project managers face major challenges:
 
-* ❌ Reactive reporting (not real-time)
-* ❌ Late risk detection
-* ❌ Inefficient resource allocation
-* ❌ Decision fatigue
+* Reactive reporting (not real-time)
+* Late risk detection
+* Inefficient resource allocation
+* Decision fatigue
 
 ---
 
-## 💡 Solution
+## Solution
 
 PM-AI Assistant solves these using:
 
-* 📊 Real-time project tracking
-* ⏱️ Delay prediction (ML models)
-* 👥 Resource optimization
-* 💬 Conversational AI assistant
+* Real-time project tracking
+* Delay prediction (ML models)
+* Resource optimization
+* Conversational AI assistant
 
 ---
 
-## 🎯 Key Features
+##  Key Features
 
-### 📊 Real-Time Progress Tracking
+###  Real-Time Progress Tracking
 
 * Live project dashboards
 * Task-level monitoring
 * Blocker detection
 
-### ⏱️ Delay Prediction
+###  Delay Prediction
 
 * Predict delays **7–14 days in advance**
 * Uses ML models (XGBoost, LSTM, heuristics)
 
-### 👥 Resource Optimization
+###  Resource Optimization
 
 * Smart workload balancing
 * Skill-based task assignment
 
-### 💡 Intelligent Recommendations
+###  Intelligent Recommendations
 
 * Daily insights & alerts
 * Risk mitigation suggestions
 
-### 💬 Conversational Interface
+###  Conversational Interface
 
 Ask questions like:
 
@@ -73,9 +73,9 @@ Ask questions like:
 
 ---
 
-## 🏗️ System Architecture
+##  System Architecture
 
-### 🔹 Architecture Layers
+###  Architecture Layers
 
 * **Client Layer** → Web App + Slack Bot
 * **API Gateway** → Security & routing
@@ -86,7 +86,7 @@ Ask questions like:
 
 ---
 
-## 🔄 System Workflow
+##  System Workflow
 
 1. User interacts via chat/web
 2. AI processes query using NLP
@@ -97,27 +97,27 @@ Ask questions like:
 
 ---
 
-## 🛠️ Technology Stack
+##  Technology Stack
 
-### 🎨 Frontend
+###  Frontend
 
 * React 18 + TypeScript
 * Tailwind CSS
 * Vite
 
-### ⚙️ Backend
+###  Backend
 
 * Python (FastAPI)
 * Node.js (Slack Bot)
 
-### 🤖 AI / ML
+###  AI / ML
 
 * OpenAI GPT-4o
 * Scikit-learn
 * XGBoost
 * Hugging Face Transformers
 
-### 🗄️ Database & Storage
+###  Database & Storage
 
 * PostgreSQL
 * Redis (cache)
@@ -125,17 +125,17 @@ Ask questions like:
 * ClickHouse (analytics)
 * Amazon S3 (file storage)
 
-### 🔄 Messaging
+###  Messaging
 
 * Apache Kafka
 
-### ☁️ Infrastructure
+###  Infrastructure
 
 * AWS EKS (Kubernetes)
 * Terraform
 * GitHub Actions CI/CD
 
-### 📊 Observability
+###  Observability
 
 * Prometheus + Grafana
 * OpenTelemetry
@@ -155,7 +155,7 @@ Ask questions like:
 
 ---
 
-## 🔐 Security
+##  Security
 
 * OAuth 2.0 / SSO authentication
 * Role-Based Access Control (RBAC)
@@ -164,7 +164,7 @@ Ask questions like:
 
 ---
 
-## 📊 Data Model
+##  Data Model
 
 Main entities:
 
@@ -177,7 +177,7 @@ Main entities:
 
 ---
 
-## 🚀 Roadmap
+##  Roadmap
 
 | Phase   | Description                  |
 | ------- | ---------------------------- |
@@ -189,7 +189,7 @@ Main entities:
 
 ---
 
-## ⚠️ Risks & Mitigation
+##  Risks & Mitigation
 
 | Risk                    | Solution                    |
 | ----------------------- | --------------------------- |
@@ -200,36 +200,36 @@ Main entities:
 
 ---
 
-## 📈 Expected Impact
+##  Expected Impact
 
-* 📈 30% improvement in project success rate
-* ⏳ Saves 4+ hours/week for managers
-* ⚡ Faster decision-making
-
----
-
-## 🔮 Future Enhancements
-
-* 📱 Mobile application
-* 🎙️ Voice-based assistant
-* 🔗 More integrations (Jira, Trello)
-* 🧠 Advanced AI models
+* 30% improvement in project success rate
+* Saves 4+ hours/week for managers
+* Faster decision-making
 
 ---
 
-## 👩‍💻 Author
+## Future Enhancements
+
+*  Mobile application
+*  Voice-based assistant
+*  More integrations (Jira, Trello)
+*  Advanced AI models
+
+---
+
+##  Author
 
 **Varshini P**
 
 ---
 
-## 📌 Status
+##  Status
 
-🚧 Prototype / Academic Project
+Prototype / Academic Project
 
 ---
 
-## 📜 License
+##  License
 
 This project is for **educational and research purposes only**.
 
