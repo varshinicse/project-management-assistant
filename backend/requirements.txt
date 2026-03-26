@@ -1,0 +1,13 @@
+fastapi
+uvicorn[standard]
+motor
+pydantic[email]
+python-jose[cryptography]
+passlib[bcrypt]
+openai
+pandas
+openpyxl
+xgboost
+scikit-learn
+python-multipart
+python-dotenv
