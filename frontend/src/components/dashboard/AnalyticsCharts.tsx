@@ -1,132 +1,163 @@
+import React from 'react';
 import {
     Chart as ChartJS,
     CategoryScale,
     LinearScale,
+    BarElement,
     PointElement,
     LineElement,
-    BarElement,
     Title,
     Tooltip,
     Legend,
-    Filler,
-    ChartOptions
+    ArcElement,
+    Filler
 } from 'chart.js';
-import { Line, Bar } from 'react-chartjs-2';
+import { Bar, Line, Doughnut } from 'react-chartjs-2';
 
 ChartJS.register(
     CategoryScale,
     LinearScale,
+    BarElement,
     PointElement,
     LineElement,
-    BarElement,
     Title,
     Tooltip,
     Legend,
+    ArcElement,
     Filler
 );
 
-const lineData = {
-    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-    datasets: [
-        {
-            label: 'Project Progress',
-            data: [30, 45, 40, 65, 80, 95],
-            fill: true,
-            borderColor: '#8b5cf6',
-            backgroundColor: 'rgba(139, 92, 246, 0.05)',
-            tension: 0.4,
-            pointRadius: 0,
-            pointHoverRadius: 6,
-            borderWidth: 2,
-        },
-    ],
-};
-
-const barData = {
-    labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E'],
-    datasets: [
-        {
-            label: 'Productivity',
-            data: [65, 80, 45, 90, 75],
-            backgroundColor: '#8b5cf6',
-            borderRadius: 8,
-            barThickness: 20,
-        },
-    ],
-};
-
-const options: ChartOptions<'line' | 'bar'> = {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-        legend: {
-            display: false,
-        },
-        tooltip: {
-            mode: 'index',
-            intersect: false,
-            backgroundColor: '#1e293b',
-            padding: 12,
-            titleFont: { size: 14, weight: 'bold' },
-            bodyFont: { size: 13 },
-            cornerRadius: 12,
-        },
-    },
-    scales: {
-        x: {
-            grid: {
-                display: false,
-            },
-            border: {
-                display: false,
-            },
-            ticks: {
-                color: '#94a3b8',
-                font: { size: 12 },
-            },
-        },
-        y: {
-            grid: {
-                color: '#f1f5f9',
-            },
-            border: {
-                display: false,
-            },
-            ticks: {
-                color: '#94a3b8',
-                font: { size: 12 },
-                maxTicksLimit: 5,
-            },
-        },
-    },
-};
-
 const AnalyticsCharts = () => {
+    const barData = {
+        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+        datasets: [
+            {
+                label: 'Tasks Completed',
+                data: [12, 19, 15, 22, 18, 10, 8],
+                backgroundColor: 'rgba(139, 92, 246, 0.8)',
+                borderRadius: 8,
+                hoverBackgroundColor: '#8B5CF6',
+            },
+        ],
+    };
+
+    const lineData = {
+        labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+        datasets: [
+            {
+                label: 'Project Velocity',
+                data: [30, 45, 35, 60],
+                borderColor: '#6366F1',
+                backgroundColor: 'rgba(99, 102, 241, 0.1)',
+                fill: true,
+                tension: 0.4,
+                borderWidth: 3,
+                pointRadius: 4,
+                pointBackgroundColor: '#fff',
+                pointBorderColor: '#6366F1',
+                pointBorderWidth: 2,
+            },
+        ],
+    };
+
+    const doughnutData = {
+        labels: ['In Progress', 'Completed', 'Delayed'],
+        datasets: [
+            {
+                data: [45, 40, 15],
+                backgroundColor: [
+                    '#8B5CF6',
+                    '#10B981',
+                    '#F43F5E',
+                ],
+                borderWidth: 0,
+                hoverOffset: 4,
+            },
+        ],
+    };
+
+    const options = {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                display: false,
+            },
+            tooltip: {
+                backgroundColor: '#1E293B',
+                padding: 12,
+                titleFont: { size: 14, weight: 'bold' },
+                bodyFont: { size: 13 },
+                cornerRadius: 8,
+                displayColors: false,
+            }
+        },
+        scales: {
+            y: {
+                beginAtZero: true,
+                grid: {
+                    color: '#F1F5F9',
+                },
+                ticks: {
+                    font: { size: 11, weight: '600' },
+                    color: '#94A3B8',
+                }
+            },
+            x: {
+                grid: {
+                    display: false,
+                },
+                ticks: {
+                    font: { size: 11, weight: '600' },
+                    color: '#94A3B8',
+                }
+            },
+        },
+    };
+
     return (
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8">
-            <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-soft">
-                <div className="flex justify-between items-center mb-6">
-                    <h3 className="text-lg font-bold text-slate-900 font-sans">Project Progress</h3>
-                    <select className="bg-slate-50 border-none text-xs font-semibold text-slate-500 rounded-lg px-2 py-1 focus:ring-0">
-                        <option>Last 6 Months</option>
-                        <option>Last Year</option>
-                    </select>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div className="lg:col-span-2 card-premium p-6">
+                <div className="flex items-center justify-between mb-8">
+                    <div>
+                        <h3 className="text-lg font-bold text-slate-900">Task Performance</h3>
+                        <p className="text-slate-500 text-xs mt-0.5">Daily completion rate trends</p>
+                    </div>
+                    <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-1.5">
+                            <div className="w-2.5 h-2.5 rounded-full bg-primary-500"></div>
+                            <span className="text-[10px] font-bold text-slate-400 uppercase">Tasks</span>
+                        </div>
+                    </div>
                 </div>
-                <div className="h-64">
-                    <Line data={lineData} options={options as any} />
+                <div className="h-72">
+                    <Bar data={barData} options={options} />
                 </div>
             </div>
 
-            <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-soft">
-                <div className="flex justify-between items-center mb-6">
-                    <h3 className="text-lg font-bold text-slate-900 font-sans">Team Productivity</h3>
-                    <select className="bg-slate-50 border-none text-xs font-semibold text-slate-500 rounded-lg px-2 py-1 focus:ring-0">
-                        <option>Current Week</option>
-                        <option>Last Week</option>
-                    </select>
+            <div className="card-premium p-6 flex flex-col">
+                <div className="mb-8">
+                    <h3 className="text-lg font-bold text-slate-900">Project Health</h3>
+                    <p className="text-slate-500 text-xs mt-0.5">Distribution of project statuses</p>
                 </div>
-                <div className="h-64">
-                    <Bar data={barData} options={options as any} />
+                <div className="flex-1 min-h-[200px] flex items-center justify-center">
+                    <Doughnut data={doughnutData} options={{ ...options, cutout: '75%' }} />
+                </div>
+                <div className="mt-6 space-y-3">
+                    <div className="flex items-center justify-between text-xs font-bold">
+                        <div className="flex items-center gap-2">
+                            <div className="w-2 h-2 rounded-full bg-primary-500"></div>
+                            <span className="text-slate-600">In Progress</span>
+                        </div>
+                        <span className="text-slate-900">45%</span>
+                    </div>
+                    <div className="flex items-center justify-between text-xs font-bold">
+                        <div className="flex items-center gap-2">
+                            <div className="w-2 h-2 rounded-full bg-emerald-500"></div>
+                            <span className="text-slate-600">Completed</span>
+                        </div>
+                        <span className="text-slate-900">40%</span>
+                    </div>
                 </div>
             </div>
         </div>

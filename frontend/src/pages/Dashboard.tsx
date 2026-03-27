@@ -3,20 +3,13 @@ import StatCards from '../components/dashboard/StatCards';
 import AnalyticsCharts from '../components/dashboard/AnalyticsCharts';
 import TaskTable from '../components/dashboard/TaskTable';
 import AIInsightsPanel from '../components/dashboard/AIInsightsPanel';
+import { CardSkeleton, ChartSkeleton } from '../components/ui/Skeleton';
 
 const Dashboard = () => {
     const { loading } = useProjects();
 
-    if (loading) {
-        return (
-            <div className="flex items-center justify-center h-[60vh]">
-                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div>
-            </div>
-        )
-    }
-
     return (
-        <div className="space-y-8 pb-10">
+        <div className="space-y-8 pb-10 animate-fade-in">
             {/* Header */}
             <div className="flex items-center justify-between">
                 <div>
@@ -30,10 +23,16 @@ const Dashboard = () => {
             </div>
 
             {/* Metric Row */}
-            <StatCards />
+            {loading ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {[1, 2, 3, 4].map(i => <CardSkeleton key={i} />)}
+                </div>
+            ) : (
+                <StatCards />
+            )}
 
             {/* Charts Section */}
-            <AnalyticsCharts />
+            {loading ? <ChartSkeleton /> : <AnalyticsCharts />}
 
             {/* AI Insights Section */}
             <AIInsightsPanel />

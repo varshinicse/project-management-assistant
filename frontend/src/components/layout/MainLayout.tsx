@@ -8,7 +8,11 @@ interface MainLayoutProps {
 
 const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
     return (
-        <div className="flex h-screen bg-surface-100 overflow-hidden font-sans">
+        <div className="flex h-screen bg-surface-50 relative overflow-hidden">
+            {/* Background Decorators */}
+            <div className="blob blob-primary -top-24 -left-24"></div>
+            <div className="blob blob-secondary top-1/2 -right-24"></div>
+
             <Sidebar />
             <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
                 <Navbar />

@@ -1,91 +1,110 @@
+import React from 'react';
+import { MoreVertical, Calendar, User, ArrowRight } from 'lucide-react';
+
 const tasks = [
     {
-        name: 'Project Alpha Redesign',
+        id: 1,
+        title: 'Design system update',
+        project: 'Website Redesign',
+        assignee: 'Alice Chen',
+        dueDate: '2024-04-12',
         status: 'In Progress',
-        deadline: 'Oct 15, 2023',
-        team: ['JD', 'AC', 'MS'],
-        progress: 65,
-        type: 'info'
+        priority: 'High'
     },
     {
-        name: 'Backend API Hardening',
+        id: 2,
+        title: 'API Authentication fix',
+        project: 'Mobile App',
+        assignee: 'Bob Smith',
+        dueDate: '2024-04-10',
         status: 'Completed',
-        deadline: 'Oct 10, 2023',
-        team: ['RK', 'TH'],
-        progress: 100,
-        type: 'success'
+        priority: 'Medium'
     },
     {
-        name: 'Mobile App Beta Test',
+        id: 3,
+        title: 'User interview summary',
+        project: 'Q2 Marketing',
+        assignee: 'Charlie Davis',
+        dueDate: '2024-04-15',
         status: 'Delayed',
-        deadline: 'Oct 08, 2023',
-        team: ['LP', 'VK', 'MS'],
-        progress: 40,
-        type: 'danger'
+        priority: 'High'
     },
     {
-        name: 'Infrastructure Migration',
-        status: 'To Do',
-        deadline: 'Oct 20, 2023',
-        team: ['JD', 'RK'],
-        progress: 10,
-        type: 'warning'
-    },
+        id: 4,
+        title: 'Cloud migration plan',
+        project: 'Internal Infrastructure',
+        assignee: 'Diana Ross',
+        dueDate: '2024-04-20',
+        status: 'In Progress',
+        priority: 'Low'
+    }
 ];
 
 const TaskTable = () => {
+    const getStatusStyles = (status: string) => {
+        switch (status) {
+            case 'Completed': return 'status-badge-success';
+            case 'Delayed': return 'status-badge-danger';
+            default: return 'status-badge-info';
+        }
+    };
+
     return (
-        <div className="bg-white rounded-2xl border border-slate-100 shadow-soft mt-8 overflow-hidden">
-            <div className="p-6 border-b border-slate-50 flex items-center justify-between">
-                <h3 className="text-lg font-bold text-slate-900 font-sans">Recent Projects & Tasks</h3>
-                <button className="text-sm font-semibold text-primary-600 hover:text-primary-700 transition-colors">View All</button>
+        <div className="card-premium overflow-hidden">
+            <div className="p-6 border-b border-slate-100 flex items-center justify-between bg-slate-50/30">
+                <div>
+                    <h3 className="text-lg font-bold text-slate-900">Recent Tasks</h3>
+                    <p className="text-slate-500 text-xs mt-0.5">Track your team's latest activities and task status.</p>
+                </div>
+                <button className="text-primary-600 text-xs font-bold hover:text-primary-700 flex items-center gap-1 transition-colors">
+                    View All <ArrowRight size={14} />
+                </button>
             </div>
+
             <div className="overflow-x-auto">
                 <table className="w-full text-left">
                     <thead>
-                        <tr className="bg-slate-50/50 text-slate-500 text-xs font-semibold uppercase tracking-wider">
-                            <th className="px-6 py-4">Project Name</th>
-                            <th className="px-6 py-4">Status</th>
-                            <th className="px-6 py-4">Deadline</th>
-                            <th className="px-6 py-4">Assigned Team</th>
-                            <th className="px-6 py-4">Progress</th>
+                        <tr className="bg-slate-50/50">
+                            <th className="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-slate-400">Task Name</th>
+                            <th className="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-slate-400">Project</th>
+                            <th className="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-slate-400">Assignee</th>
+                            <th className="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-slate-400">Due Date</th>
+                            <th className="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-slate-400">Status</th>
+                            <th className="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-slate-400 w-10"></th>
                         </tr>
                     </thead>
                     <tbody className="divide-y divide-slate-50">
                         {tasks.map((task) => (
-                            <tr key={task.name} className="hover:bg-slate-50/50 transition-colors cursor-pointer group">
+                            <tr key={task.id} className="group hover:bg-slate-50/50 transition-colors cursor-pointer">
                                 <td className="px-6 py-4">
-                                    <span className="text-sm font-semibold text-slate-900 group-hover:text-primary-600 transition-colors">{task.name}</span>
+                                    <div className="font-bold text-slate-900 text-sm group-hover:text-primary-600 transition-colors">{task.title}</div>
                                 </td>
                                 <td className="px-6 py-4">
-                                    <span className={`status-badge status-badge-${task.type}`}>
+                                    <span className="text-xs font-semibold text-slate-500 bg-slate-100 px-2 py-1 rounded-md">{task.project}</span>
+                                </td>
+                                <td className="px-6 py-4">
+                                    <div className="flex items-center gap-2">
+                                        <div className="w-7 h-7 rounded-lg bg-primary-50 text-primary-600 flex items-center justify-center font-bold text-[10px]">
+                                            {task.assignee.split(' ').map(n => n[0]).join('')}
+                                        </div>
+                                        <span className="text-sm font-medium text-slate-700">{task.assignee}</span>
+                                    </div>
+                                </td>
+                                <td className="px-6 py-4">
+                                    <div className="flex items-center gap-1.5 text-slate-500 text-xs font-medium">
+                                        <Calendar size={14} className="text-slate-400" />
+                                        {task.dueDate}
+                                    </div>
+                                </td>
+                                <td className="px-6 py-4">
+                                    <span className={`status-badge ${getStatusStyles(task.status)}`}>
                                         {task.status}
                                     </span>
                                 </td>
                                 <td className="px-6 py-4">
-                                    <span className="text-sm text-slate-500">{task.deadline}</span>
-                                </td>
-                                <td className="px-6 py-4">
-                                    <div className="flex -space-x-2">
-                                        {task.team.map((member, i) => (
-                                            <div key={i} className="w-8 h-8 rounded-full bg-slate-100 border-2 border-white flex items-center justify-center text-[10px] font-bold text-slate-600">
-                                                {member}
-                                            </div>
-                                        ))}
-                                    </div>
-                                </td>
-                                <td className="px-6 py-4">
-                                    <div className="w-full max-w-[120px]">
-                                        <div className="flex justify-between items-center mb-1">
-                                            <span className="text-[10px] font-bold text-slate-500">{task.progress}%</span>
-                                        </div>
-                                        <div className="h-1.5 w-full bg-slate-100 rounded-full overflow-hidden">
-                                            <div
-                                                className={`h-full rounded-full transition-all duration-1000 ${task.progress === 100 ? 'bg-emerald-500' : 'bg-primary-500'}`}
-                                                style={{ width: `${task.progress}%` }}
-                                            />
-                                        </div>
-                                    </div>
+                                    <button className="p-1.5 text-slate-300 hover:text-slate-600 rounded-lg hover:bg-white transition-all">
+                                        <MoreVertical size={16} />
+                                    </button>
                                 </td>
                             </tr>
                         ))}

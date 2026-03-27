@@ -5,66 +5,74 @@
 @layer base {
   :root {
     --primary: 139 92 246;
-    /* violet-500 */
     --surface: 248 250 252;
-    /* slate-50 */
   }
 
   body {
-    @apply bg-surface-100 text-slate-900 font-sans antialiased;
-    background-image: radial-gradient(at 0% 0%, rgba(139, 92, 246, 0.03) 0px, transparent 50%),
-      radial-gradient(at 100% 100%, rgba(139, 92, 246, 0.03) 0px, transparent 50%);
+    @apply bg-surface-50 text-slate-900 font-sans antialiased overflow-x-hidden;
+    /* Premium background with subtle gradient and blobs */
+    background-image:
+      radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.03) 0px, transparent 50%),
+      radial-gradient(at 100% 100%, rgba(139, 92, 246, 0.03) 0px, transparent 50%),
+      linear-gradient(to bottom, #F8FAFC, #FFFFFF);
+    background-attachment: fixed;
   }
 }
 
 @layer components {
-  .glass-card {
-    @apply bg-white/70 backdrop-blur-md border border-white/20 shadow-soft rounded-2xl;
+
+  /* Premium Cards */
+  .card-premium {
+    @apply bg-white border border-slate-200/60 shadow-soft rounded-2xl transition-all duration-300 hover:shadow-premium hover:-translate-y-1 hover:scale-[1.01];
   }
 
+  .glass-card {
+    @apply bg-white/70 backdrop-blur-xl border border-white/40 shadow-premium rounded-2xl;
+  }
+
+  /* Premium Sidebar */
   .premium-sidebar {
-    @apply bg-white border-r border-slate-200/60;
-    box-shadow: 1px 0 0 0 rgba(0, 0, 0, 0.05);
+    background-color: #F1F5FF;
+    @apply backdrop-blur-md border-r border-slate-200/60 z-30 transition-all duration-300;
   }
 
   .nav-link {
-    @apply flex items-center px-4 py-2.5 rounded-lg transition-all duration-200 gap-3 text-sm font-medium;
+    @apply flex items-center px-4 py-3 rounded-xl transition-all duration-200 gap-3 text-sm font-semibold text-slate-500 hover:text-indigo-600 hover:bg-indigo-50/50 hover:scale-105;
   }
 
   .nav-link.active {
-    @apply bg-primary-50 text-primary-600 shadow-sm;
+    @apply bg-gradient-primary text-white shadow-premium scale-[1.02];
   }
 
-  .nav-link:not(.active) {
-    @apply text-slate-500 hover:text-slate-900 hover:bg-slate-50;
-  }
-
-  .stat-card {
-    @apply bg-white p-6 rounded-2xl border border-slate-100 shadow-soft hover:shadow-premium hover:-translate-y-1 transition-all duration-300;
+  /* Premium Buttons */
+  .btn-gradient {
+    @apply bg-gradient-primary text-white px-6 py-2.5 rounded-xl font-bold shadow-premium hover:shadow-hover hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 flex items-center justify-center gap-2;
   }
 
   .btn-primary {
-    @apply bg-primary-600 text-white px-5 py-2 rounded-lg font-medium shadow-sm hover:bg-primary-700 active:scale-[0.98] transition-all duration-200 inline-flex items-center justify-center gap-2;
+    @apply bg-primary-600 text-white px-5 py-2.5 rounded-xl font-semibold shadow-soft hover:shadow-premium hover:-translate-y-0.5 active:scale-95 transition-all duration-200 flex items-center justify-center gap-2;
   }
 
   .btn-secondary {
-    @apply bg-white text-slate-700 border border-slate-200 px-5 py-2 rounded-lg font-medium shadow-sm hover:bg-slate-50 active:scale-[0.98] transition-all duration-200 inline-flex items-center justify-center gap-2;
+    @apply bg-white text-slate-700 border border-slate-200/80 px-5 py-2.5 rounded-xl font-semibold shadow-soft hover:bg-slate-50 hover:border-slate-300 active:scale-95 transition-all duration-200 flex items-center justify-center gap-2;
   }
 
+  /* Premium Inputs */
   .input-field {
-    @apply w-full px-4 py-2 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 transition-all duration-200 bg-white/50 backdrop-blur-sm;
+    @apply w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-white/50 backdrop-blur-sm focus:outline-none focus:ring-4 focus:ring-primary-500/10 focus:border-primary-500 transition-all duration-200 text-slate-900 placeholder:text-slate-400;
   }
 
+  /* Premium Badges */
   .status-badge {
-    @apply px-2.5 py-1 rounded-full text-xs font-semibold uppercase tracking-wider inline-flex items-center gap-1.5;
+    @apply px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider inline-flex items-center gap-1.5 shadow-sm;
   }
 
   .status-badge-success {
-    @apply bg-emerald-50 text-emerald-700 border border-emerald-100;
+    @apply bg-soft-green text-emerald-700 border border-emerald-100;
   }
 
   .status-badge-warning {
-    @apply bg-amber-50 text-amber-700 border border-amber-100;
+    @apply bg-soft-orange text-amber-700 border border-amber-100;
   }
 
   .status-badge-danger {
@@ -72,12 +80,12 @@
   }
 
   .status-badge-info {
-    @apply bg-sky-50 text-sky-700 border border-sky-100;
+    @apply bg-soft-blue text-sky-700 border border-sky-100;
   }
 
-  /* Custom Scrollbar */
+  /* Scrollbars */
   ::-webkit-scrollbar {
-    width: 6px;
+    width: 5px;
   }
 
   ::-webkit-scrollbar-track {
@@ -85,14 +93,15 @@
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-slate-200 rounded-full hover:bg-slate-300 transition-colors;
+    @apply bg-slate-200 rounded-full hover:bg-slate-300;
   }
 }
 
+/* Base Animations */
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(12px);
   }
 
   to {
@@ -102,5 +111,39 @@
 }
 
 .animate-fade-in {
-  animation: fadeIn 0.4s ease-out forwards;
+  animation: fadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Shimmer */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg,
+      rgba(241, 245, 249, 0.6) 25%,
+      rgba(248, 250, 252, 0.9) 50%,
+      rgba(241, 245, 249, 0.6) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite linear;
+}
+
+/* Floating Blobs */
+.blob {
+  @apply absolute rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-float;
+}
+
+.blob-primary {
+  @apply bg-primary-400 w-96 h-96;
+}
+
+.blob-secondary {
+  @apply bg-indigo-400 w-80 h-80;
+  animation-delay: 1.5s;
 }

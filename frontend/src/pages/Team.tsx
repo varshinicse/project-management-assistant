@@ -1,127 +1,185 @@
-import { Mail, Phone, MoreVertical, MessageSquare } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import {
+    Users,
+    Search,
+    Filter,
+    UserPlus,
+    Mail,
+    MessageSquare,
+    CheckCircle2,
+    Clock,
+    AlertCircle
+} from 'lucide-react';
+import { CardSkeleton } from '../components/ui/Skeleton';
 
 const members = [
     {
-        name: 'Alex Chen',
+        id: 1,
+        name: 'Alice Chen',
         role: 'Senior Developer',
-        email: 'alex.chen@example.com',
-        workload: 85,
-        status: 'Online',
-        avatar: 'AC'
+        email: 'alice@pmai.com',
+        projects: 3,
+        tasksCompleted: 42,
+        load: 85,
+        status: 'Online'
     },
     {
-        name: 'Sarah Miller',
-        role: 'Product Designer',
-        email: 'sarah.m@example.com',
-        workload: 45,
-        status: 'Away',
-        avatar: 'SM'
+        id: 2,
+        name: 'Bob Smith',
+        role: 'Lead Designer',
+        email: 'bob@pmai.com',
+        projects: 2,
+        tasksCompleted: 28,
+        load: 60,
+        status: 'Busy'
     },
     {
-        name: 'Ryan Knight',
-        role: 'Backend Engineer',
-        email: 'ryan.k@example.com',
-        workload: 92,
-        status: 'Online',
-        avatar: 'RK'
+        id: 3,
+        name: 'Charlie Davis',
+        role: 'Backend Dev',
+        email: 'charlie@pmai.com',
+        projects: 4,
+        tasksCompleted: 15,
+        load: 95,
+        status: 'Online'
     },
     {
-        name: 'Lisa Park',
-        role: 'QA Specialist',
-        email: 'lisa.p@example.com',
-        workload: 30,
-        status: 'Offline',
-        avatar: 'LP'
-    },
-    {
-        name: 'James Doe',
-        role: 'Project Manager',
-        email: 'james.doe@example.com',
-        workload: 60,
-        status: 'Online',
-        avatar: 'JD'
-    },
-    {
-        name: 'Valerie King',
-        role: 'Frontend Dev',
-        email: 'valerie.k@example.com',
-        workload: 75,
-        status: 'Away',
-        avatar: 'VK'
+        id: 4,
+        name: 'Diana Ross',
+        role: 'QA Engineer',
+        email: 'diana@pmai.com',
+        projects: 5,
+        tasksCompleted: 120,
+        load: 40,
+        status: 'Away'
     }
 ];
 
 const Team = () => {
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const timer = setTimeout(() => setLoading(false), 900);
+        return () => clearTimeout(timer);
+    }, []);
+
+    const getStatusIcon = (status: string) => {
+        switch (status) {
+            case 'Online': return <CheckCircle2 className="text-emerald-500" size={16} />;
+            case 'Busy': return <AlertCircle className="text-rose-500" size={16} />;
+            default: return <Clock className="text-amber-500" size={16} />;
+        }
+    };
+
     return (
-        <div className="space-y-8 pb-10">
-            {/* Header */}
-            <div className="flex items-center justify-between">
+        <div className="space-y-8 pb-10 animate-fade-in">
+            {/* Header Area */}
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div>
-                    <h1 className="text-3xl font-bold text-slate-900 tracking-tight">Team Members</h1>
-                    <p className="text-slate-500 text-sm mt-1">Manage your team and monitor their current capacity.</p>
+                    <h1 className="text-3xl font-bold text-slate-900 tracking-tight">Team</h1>
+                    <p className="text-slate-500 text-sm mt-1">Manage team roles, workload, and performance across projects.</p>
                 </div>
-                <button className="btn-primary">Invite Member</button>
+                <div className="flex items-center gap-3">
+                    <button className="btn-secondary h-10 px-4 text-sm">
+                        <Filter size={16} />
+                        <span>Filter</span>
+                    </button>
+                    <button className="btn-primary h-10 px-4 text-sm">
+                        <UserPlus size={18} />
+                        <span>Invite Member</span>
+                    </button>
+                </div>
+            </div>
+
+            {/* Search & Tabs */}
+            <div className="flex items-center justify-between border-b border-slate-100 pb-4">
+                <div className="flex items-center gap-8">
+                    {['All Members', 'Active', 'Off-site', 'Contractors'].map((tab, idx) => (
+                        <button
+                            key={tab}
+                            className={`text-sm font-semibold pb-4 -mb-4 transition-all ${idx === 0 ? 'text-primary-600 border-b-2 border-primary-600' : 'text-slate-400 hover:text-slate-600'
+                                }`}
+                        >
+                            {tab}
+                        </button>
+                    ))}
+                </div>
+                <div className="relative group max-w-xs w-full">
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 group-focus-within:text-primary-600 transition-colors" />
+                    <input
+                        type="text"
+                        placeholder="Search team members..."
+                        className="input-field pl-10 h-10 text-sm"
+                    />
+                </div>
             </div>
 
             {/* Team Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {members.map((member) => (
-                    <div key={member.email} className="bg-white rounded-2xl border border-slate-100 shadow-soft p-6 hover:shadow-premium hover:-translate-y-1 transition-all duration-300 group">
-                        <div className="flex justify-between items-start mb-6">
-                            <div className="flex items-center gap-4">
-                                <div className="relative">
-                                    <div className="w-14 h-14 rounded-2xl bg-primary-100 border-2 border-primary-50 flex items-center justify-center text-primary-700 font-bold text-lg group-hover:scale-110 transition-transform">
-                                        {member.avatar}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                {loading ? (
+                    [1, 2, 3, 4].map(i => <CardSkeleton key={i} />)
+                ) : (
+                    members.map((member) => (
+                        <div key={member.id} className="bg-white p-6 rounded-2xl border border-slate-100 shadow-soft hover:shadow-premium hover:-translate-y-1 transition-all duration-300 group">
+                            <div className="flex justify-between items-start mb-6">
+                                <div className="flex items-center gap-4">
+                                    <div className="w-12 h-12 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-600 font-bold overflow-hidden relative">
+                                        <div className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-white rounded-full border-2 border-white flex items-center justify-center translate-x-0.5 translate-y-0.5">
+                                            <div className={`w-2 h-2 rounded-full ${member.status === 'Online' ? 'bg-emerald-500' :
+                                                    member.status === 'Busy' ? 'bg-rose-500' : 'bg-amber-500'
+                                                }`}></div>
+                                        </div>
+                                        {member.name.split(' ').map(n => n[0]).join('')}
                                     </div>
-                                    <div className={`absolute -bottom-1 -right-1 w-4 h-4 rounded-full border-2 border-white ${member.status === 'Online' ? 'bg-emerald-500' :
-                                        member.status === 'Away' ? 'bg-amber-500' : 'bg-slate-300'
-                                        }`} />
-                                </div>
-                                <div className="min-w-0">
-                                    <h3 className="text-base font-bold text-slate-900 truncate">{member.name}</h3>
-                                    <p className="text-xs font-medium text-slate-500">{member.role}</p>
-                                </div>
-                            </div>
-                            <button className="p-1.5 text-slate-400 hover:text-slate-600 hover:bg-slate-50 rounded-lg transition-colors">
-                                <MoreVertical size={18} />
-                            </button>
-                        </div>
-
-                        <div className="space-y-4">
-                            <div>
-                                <div className="flex justify-between items-center mb-1.5">
-                                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Current Workload</span>
-                                    <span className={`text-xs font-bold ${member.workload > 90 ? 'text-rose-600' :
-                                        member.workload > 70 ? 'text-amber-600' : 'text-primary-600'
-                                        }`}>{member.workload}%</span>
-                                </div>
-                                <div className="h-2 w-full bg-slate-50 rounded-full overflow-hidden">
-                                    <div
-                                        className={`h-full rounded-full transition-all duration-1000 ${member.workload > 90 ? 'bg-rose-500' :
-                                            member.workload > 70 ? 'bg-amber-500' : 'bg-primary-500'
-                                            }`}
-                                        style={{ width: `${member.workload}%` }}
-                                    />
+                                    <div>
+                                        <h3 className="font-bold text-slate-900 group-hover:text-primary-600 transition-colors">
+                                            {member.name}
+                                        </h3>
+                                        <p className="text-xs text-slate-500 font-medium">{member.role}</p>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div className="pt-4 border-t border-slate-50 flex items-center justify-between gap-2">
-                                <div className="flex items-center gap-2">
-                                    <button className="p-2 text-slate-400 hover:text-primary-600 hover:bg-primary-50 rounded-xl transition-all">
-                                        <Mail size={18} />
-                                    </button>
-                                    <button className="p-2 text-slate-400 hover:text-primary-600 hover:bg-primary-50 rounded-xl transition-all">
-                                        <Phone size={18} />
-                                    </button>
+                            <div className="space-y-4 mb-8">
+                                <div className="space-y-2">
+                                    <div className="flex justify-between text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+                                        <span>Current Workload</span>
+                                        <span className={member.load > 80 ? 'text-rose-500' : 'text-slate-600'}>{member.load}%</span>
+                                    </div>
+                                    <div className="h-1.5 w-full bg-slate-50 rounded-full overflow-hidden">
+                                        <div
+                                            className={`h-full rounded-full transition-all duration-1000 ${member.load > 80 ? 'bg-rose-500' : 'bg-primary-600'
+                                                }`}
+                                            style={{ width: `${member.load}%` }}
+                                        ></div>
+                                    </div>
                                 </div>
-                                <button className="flex-1 flex items-center justify-center gap-2 py-2 bg-slate-50 hover:bg-primary-50 text-slate-600 hover:text-primary-600 rounded-xl text-xs font-bold transition-all">
-                                    <MessageSquare size={16} />
-                                    Send Message
+
+                                <div className="grid grid-cols-2 gap-4">
+                                    <div className="bg-slate-50 p-2.5 rounded-xl text-center">
+                                        <div className="text-sm font-bold text-slate-800">{member.projects}</div>
+                                        <div className="text-[10px] text-slate-400 font-bold uppercase">Projects</div>
+                                    </div>
+                                    <div className="bg-slate-50 p-2.5 rounded-xl text-center">
+                                        <div className="text-sm font-bold text-slate-800">{member.tasksCompleted}</div>
+                                        <div className="text-[10px] text-slate-400 font-bold uppercase">Tasks</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="flex items-center gap-2 pt-4 border-t border-slate-50">
+                                <button className="flex-1 btn-secondary h-9 px-0 text-xs gap-1.5">
+                                    <Mail size={14} />
+                                    <span>Email</span>
+                                </button>
+                                <button className="flex-1 btn-secondary h-9 px-0 text-xs gap-1.5 hover:text-primary-600 hover:border-primary-100">
+                                    <MessageSquare size={14} />
+                                    <span>Message</span>
                                 </button>
                             </div>
                         </div>
-                    </div>
-                ))}
+                    ))
+                )}
             </div>
         </div>
     );
