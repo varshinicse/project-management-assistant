@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
     Briefcase,
-    Users,
-    Calendar,
     TrendingUp,
     ChevronRight,
+    Users,
+    Calendar,
     Search,
     Filter
 } from 'lucide-react';

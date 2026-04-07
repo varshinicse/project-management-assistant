@@ -1,10 +1,12 @@
+import { useState } from 'react';
 import Sidebar from './Sidebar';
 import TopNav from './TopNav';
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
+    const [collapsed, setCollapsed] = useState(false);
     return (
         <div className="flex h-screen overflow-hidden bg-[#F4F5F7]">
-            <Sidebar />
+            <Sidebar collapsed={collapsed} setCollapsed={setCollapsed} />
             <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
                 <TopNav />
                 <main className="flex-1 overflow-y-auto p-6">

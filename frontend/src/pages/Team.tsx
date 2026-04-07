@@ -1,14 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import {
-    Users,
     Search,
     Filter,
     UserPlus,
     Mail,
-    MessageSquare,
-    CheckCircle2,
-    Clock,
-    AlertCircle
+    MessageSquare
 } from 'lucide-react';
 import { CardSkeleton } from '../components/ui/Skeleton';
 
@@ -62,14 +58,6 @@ const Team = () => {
         const timer = setTimeout(() => setLoading(false), 900);
         return () => clearTimeout(timer);
     }, []);
-
-    const getStatusIcon = (status: string) => {
-        switch (status) {
-            case 'Online': return <CheckCircle2 className="text-emerald-500" size={16} />;
-            case 'Busy': return <AlertCircle className="text-rose-500" size={16} />;
-            default: return <Clock className="text-amber-500" size={16} />;
-        }
-    };
 
     return (
         <div className="space-y-8 pb-10 animate-fade-in">
@@ -126,7 +114,7 @@ const Team = () => {
                                     <div className="w-12 h-12 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-600 font-bold overflow-hidden relative">
                                         <div className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-white rounded-full border-2 border-white flex items-center justify-center translate-x-0.5 translate-y-0.5">
                                             <div className={`w-2 h-2 rounded-full ${member.status === 'Online' ? 'bg-emerald-500' :
-                                                    member.status === 'Busy' ? 'bg-rose-500' : 'bg-amber-500'
+                                                member.status === 'Busy' ? 'bg-rose-500' : 'bg-amber-500'
                                                 }`}></div>
                                         </div>
                                         {member.name.split(' ').map(n => n[0]).join('')}

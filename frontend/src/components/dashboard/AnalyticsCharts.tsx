@@ -1,4 +1,3 @@
-import React from 'react';
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -12,7 +11,7 @@ import {
     ArcElement,
     Filler
 } from 'chart.js';
-import { Bar, Line, Doughnut } from 'react-chartjs-2';
+import { Bar, Doughnut } from 'react-chartjs-2';
 
 ChartJS.register(
     CategoryScale,
@@ -41,25 +40,6 @@ const AnalyticsCharts = () => {
         ],
     };
 
-    const lineData = {
-        labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
-        datasets: [
-            {
-                label: 'Project Velocity',
-                data: [30, 45, 35, 60],
-                borderColor: '#6366F1',
-                backgroundColor: 'rgba(99, 102, 241, 0.1)',
-                fill: true,
-                tension: 0.4,
-                borderWidth: 3,
-                pointRadius: 4,
-                pointBackgroundColor: '#fff',
-                pointBorderColor: '#6366F1',
-                pointBorderWidth: 2,
-            },
-        ],
-    };
-
     const doughnutData = {
         labels: ['In Progress', 'Completed', 'Delayed'],
         datasets: [
@@ -76,7 +56,7 @@ const AnalyticsCharts = () => {
         ],
     };
 
-    const options = {
+    const barOptions = {
         responsive: true,
         maintainAspectRatio: false,
         plugins: {
@@ -86,7 +66,7 @@ const AnalyticsCharts = () => {
             tooltip: {
                 backgroundColor: '#1E293B',
                 padding: 12,
-                titleFont: { size: 14, weight: 'bold' },
+                titleFont: { size: 14, weight: 'bold' as const },
                 bodyFont: { size: 13 },
                 cornerRadius: 8,
                 displayColors: false,
@@ -99,7 +79,7 @@ const AnalyticsCharts = () => {
                     color: '#F1F5F9',
                 },
                 ticks: {
-                    font: { size: 11, weight: '600' },
+                    font: { size: 11, weight: 'bold' as const },
                     color: '#94A3B8',
                 }
             },
@@ -108,7 +88,7 @@ const AnalyticsCharts = () => {
                     display: false,
                 },
                 ticks: {
-                    font: { size: 11, weight: '600' },
+                    font: { size: 11, weight: 'bold' as const },
                     color: '#94A3B8',
                 }
             },
@@ -131,7 +111,7 @@ const AnalyticsCharts = () => {
                     </div>
                 </div>
                 <div className="h-72">
-                    <Bar data={barData} options={options} />
+                    <Bar data={barData} options={barOptions} />
                 </div>
             </div>
 
@@ -141,7 +121,22 @@ const AnalyticsCharts = () => {
                     <p className="text-slate-500 text-xs mt-0.5">Distribution of project statuses</p>
                 </div>
                 <div className="flex-1 min-h-[200px] flex items-center justify-center">
-                    <Doughnut data={doughnutData} options={{ ...options, cutout: '75%' }} />
+                    <Doughnut data={doughnutData} options={{
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        cutout: '75%',
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                backgroundColor: '#1E293B',
+                                padding: 12,
+                                titleFont: { size: 14, weight: 'bold' as const },
+                                bodyFont: { size: 13 },
+                                cornerRadius: 8,
+                                displayColors: false,
+                            }
+                        }
+                    }} />
                 </div>
                 <div className="mt-6 space-y-3">
                     <div className="flex items-center justify-between text-xs font-bold">

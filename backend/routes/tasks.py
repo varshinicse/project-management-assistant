@@ -18,6 +18,7 @@ async def create_task(task: TaskCreate, project_id: str, db: AsyncIOMotorDatabas
     
     result = await db.tasks.insert_one(task_dict)
     task_dict["_id"] = str(result.inserted_id)
+    task_dict["id"] = task_dict["_id"]
     
     # Update project task list
     await db.projects.update_one(

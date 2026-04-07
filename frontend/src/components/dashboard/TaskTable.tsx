@@ -1,5 +1,4 @@
-import React from 'react';
-import { MoreVertical, Calendar, User, ArrowRight } from 'lucide-react';
+import { MoreVertical, Calendar, ArrowRight } from 'lucide-react';
 
 const tasks = [
     {
